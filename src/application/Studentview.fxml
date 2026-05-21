@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #1a1a2e;"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="application.StudentsController">
+
+  
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="900.0"
+            styleClass="topbar" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="brand-label" text="  Enrollment System" />
+         </children>
+      </HBox>
+   </top>
+
+   
+   <left>
+      <VBox prefHeight="652.0" prefWidth="200.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#showDashBoard"   prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn"             text="Dashboard" />
+            <Button mnemonicParsing="false" onAction="#showStudents"    prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn, nav-active" text="Students" />
+            <Button mnemonicParsing="false" onAction="#showCourses"     prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn"             text="Courses" />
+            <Button mnemonicParsing="false" onAction="#showEnrollments" prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn"             text="Enrollments" />
+            <Button mnemonicParsing="false" onAction="#showSchedule"    prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn"             text="Schedule" />
+         </children>
+      </VBox>
+   </left>
+
+   
+   <center>
+      <ScrollPane fitToWidth="true"
+          style="-fx-background: #1a1a2e; -fx-background-color: #1a1a2e; -fx-border-color: transparent;">
+         <content>
+            <VBox prefWidth="680.0" spacing="16" styleClass="main-content">
+               <children>
+
+                  <Label styleClass="page-title" text="Students" />
+
+
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <children>
+                        <TextField fx:id="searchField" prefWidth="340.0" styleClass="text-field" />
+                        <Button onAction="#searchStudent" prefWidth="90.0"  styleClass="btn-primary"   text="Search" />
+                        <Button onAction="#clearForm"     prefWidth="80.0"  styleClass="btn-secondary" text="Clear" />
+                     </children>
+                  </HBox>
+
+                 
+                  <VBox spacing="12" styleClass="card">
+                     <children>
+                        <Label styleClass="card-title" text="Add / edit student" />
+
+                        <HBox spacing="12">
+                           <children>
+                              <VBox prefWidth="240.0" spacing="4">
+                                 <children>
+                                    <Label styleClass="form-label" text="Student ID" />
+                                    <TextField fx:id="studentIdField" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="240.0" spacing="4">
+                                 <children>
+                                    <Label styleClass="form-label" text="Program" />
+                                    <TextField fx:id="programField" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+
+                        <HBox spacing="12">
+                           <children>
+                              <VBox prefWidth="240.0" spacing="4">
+                                 <children>
+                                    <Label styleClass="form-label" text="First name" />
+                                    <TextField fx:id="firstNameField" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="240.0" spacing="4">
+                                 <children>
+                                    <Label styleClass="form-label" text="Last name" />
+                                    <TextField fx:id="lastNameField" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                           <children>
+                              <VBox prefWidth="160.0" spacing="4">
+                                 <children>
+                                    <Label styleClass="form-label" text="Year level" />
+                                    <ComboBox fx:id="yearLevelBox" prefWidth="160.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                           <children>
+                              <Button onAction="#saveStudent"   prefWidth="100.0" styleClass="btn-primary" text="Save" />
+                              <Button onAction="#deleteStudent" prefWidth="100.0" styleClass="btn-danger"  text="Delete" />
+                           </children>
+                        </HBox>
+
+                        <Label fx:id="statusLabel" text="" />
+                     </children>
+                  </VBox>
+
+                 
+                  <VBox spacing="10" styleClass="card">
+                     <children>
+                        <Label styleClass="card-title" text="Student list" />
+                        <TableView fx:id="studentTable" prefHeight="220.0" prefWidth="640.0" styleClass="styled-table">
+                           <columns>
+                              <TableColumn fx:id="idCol"        prefWidth="130.0" text="Student ID" />
+                              <TableColumn fx:id="firstNameCol" prefWidth="140.0" text="First name" />
+                              <TableColumn fx:id="lastNameCol"  prefWidth="140.0" text="Last name" />
+                              <TableColumn fx:id="programCol"   prefWidth="110.0" text="Program" />
+                              <TableColumn fx:id="yearCol"      prefWidth="120.0" text="Year" />
+                           </columns>
+                           <placeholder>
+                              <Label styleClass="table-placeholder" text="No students found." />
+                           </placeholder>
+                        </TableView>
+                     </children>
+                  </VBox>
+
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+
+</BorderPane>

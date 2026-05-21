@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #1a1a2e;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+
+   
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="900.0" styleClass="topbar" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="brand-label" text="  Enrollment System" />
+         </children>
+      </HBox>
+   </top>
+
+  
+   <left>
+      <VBox prefHeight="652.0" prefWidth="200.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#showDashBoard" prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn" text="Dashboard" />
+            <Button mnemonicParsing="false" onAction="#showStudents" prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn" text="Students" />
+            <Button mnemonicParsing="false" onAction="#showCourses" prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn" text="Courses" />
+            <Button mnemonicParsing="false" onAction="#showEnrollments" prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn" text="Enrollments" />
+            <Button mnemonicParsing="false" onAction="#showSchedule" prefHeight="50.0" prefWidth="200.0" styleClass="nav-btn, nav-active" text="Schedule" />
+         </children>
+      </VBox>
+   </left>
+
+  
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background: #1a1a2e; -fx-background-color: #1a1a2e; -fx-border-color: transparent;">
+         <content>
+            <VBox prefWidth="680.0" spacing="16" styleClass="main-content">
+               <children>
+
+                  
+                  <Label styleClass="page-title" text="Schedule" />
+
+                 
+                  <VBox spacing="12" styleClass="card">
+                     <children>
+                        <Label styleClass="card-title" text="Generate schedule" />
+
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                           <children>
+                              <VBox prefWidth="340.0" spacing="4">
+                                 <children>
+                                    <Label styleClass="form-label" text="Student ID" />
+                                    <TextField fx:id="studentIdField" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="4">
+                                 <children>
+                                    <Label text="" />
+                                    <Button onAction="#generateSchedule" prefWidth="120.0" styleClass="btn-primary" text="Generate" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+
+                      
+                        <HBox fx:id="studentBanner" alignment="CENTER_LEFT" managed="false" spacing="8" style="-fx-background-color: #0f3460; -fx-background-radius: 8; -fx-padding: 10;" visible="false">
+                           <children>
+                              <Label fx:id="studentNameLabel" style="-fx-text-fill: #e2e8f0; -fx-font-size: 13px; -fx-font-weight: bold;" text="" />
+                              <Label style="-fx-text-fill: #64748b;" text="  ·  " />
+                              <Label fx:id="studentProgramLabel" style="-fx-text-fill: #94a3b8; -fx-font-size: 13px;" text="" />
+                              <Label style="-fx-text-fill: #64748b;" text="  ·  Year " />
+                              <Label fx:id="studentYearLabel" style="-fx-text-fill: #94a3b8; -fx-font-size: 13px;" text="" />
+                           </children>
+                        </HBox>
+
+                        <Label fx:id="statusLabel" text="" />
+                     </children>
+                  </VBox>
+
+                 
+                  <HBox fx:id="summaryBox" managed="false" spacing="12" visible="false">
+                     <children>
+                        <VBox prefWidth="160.0" styleClass="stat-card">
+                           <children>
+                              <Label styleClass="stat-label" text="Courses" />
+                              <Label fx:id="totalCoursesLabel" styleClass="stat-value" text="0" />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="160.0" styleClass="stat-card">
+                           <children>
+                              <Label styleClass="stat-label" text="Total units" />
+                              <Label fx:id="totalUnitsLabel" styleClass="stat-value" text="0" />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="200.0" styleClass="stat-card">
+                           <children>
+                              <Label styleClass="stat-label" text="Conflicts" />
+                              <Label fx:id="conflictsLabel" styleClass="value-success" text="None detected" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+
+                  
+                  <VBox fx:id="scheduleCard" managed="false" spacing="10" styleClass="card" visible="false">
+                     <children>
+                        <Label styleClass="card-title" text="Recommended schedule" />
+
+                        <TableView fx:id="scheduleTable" prefHeight="280.0" prefWidth="640.0" styleClass="styled-table">
+                           <columns>
+                              <TableColumn fx:id="codeCol" prefWidth="90.0" text="Code" />
+                              <TableColumn fx:id="nameCol" prefWidth="200.0" text="Course name" />
+                              <TableColumn fx:id="unitsCol" prefWidth="60.0" text="Units" />
+                              <TableColumn fx:id="dayCol" prefWidth="80.0" text="Day" />
+                              <TableColumn fx:id="scheduleCol" prefWidth="200.0" text="Time" />
+                           </columns>
+                           <placeholder>
+                              <Label styleClass="table-placeholder" text="No schedule generated yet." />
+                           </placeholder>
+                        </TableView>
+
+                        <HBox alignment="CENTER_RIGHT">
+                           <children>
+                              <Button onAction="#clearSchedule" prefWidth="80.0" styleClass="btn-secondary" text="Clear" />
+                           </children>
+                        </HBox>
+
+                     </children>
+                  </VBox>
+
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+
+</BorderPane>
